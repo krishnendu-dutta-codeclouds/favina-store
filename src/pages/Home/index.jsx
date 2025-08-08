@@ -12,6 +12,7 @@ import { colors, fontSizes, fonts } from '../../assets/styles/theme';
 import BeautyPicks from './BeautyPicks';
 import SkinSpotlight from './SkinSpotlight';
 import NewPromoSection from '../../components/common/NewPromoSection';
+import OptimizedImage from '../../components/common/OptimizedImage';
 
 const sliderMessages = [
   { text: "Limited Time Only", highlight: true },
@@ -55,7 +56,16 @@ const HomePage = () => {
   return (
     <>
       <HeroSection $banner={`${bannerImg}`}>
-         <Container>
+        <OptimizedImage
+          src={bannerImg}
+          alt="Hero Banner"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          loading="eager"
+          className="hero-banner-image"
+        />
+        <Container>
           <HeroInner>
             <HeroHeading>
               Unleash Your <Highlight>Natural Glow</Highlight>
@@ -128,22 +138,41 @@ const HeroSection = styled.section`
   width: 100%;
   min-height: 40vh;
   padding: 100px 30px 100px;
-  background: url(${props => props.$banner}) no-repeat;
+  //background: url(${props => props.$banner}) no-repeat;
   background-size: cover;
   background-position:center;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  position: relative;
+  .hero-banner-image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    @media (max-width: 900px) {
+        z-index: 0;
+        height: 63vw;
+        margin-left: auto;
+        margin-right: 0;
+        display: flex;
+        object-position: right -14vw bottom 0vw;
+        position: relative;
+    }
+  }
   @media (max-width: 900px) {
     padding-top:0;
     padding-left: 0;
     padding-right: 0;
-    padding-bottom: 55vw;
+    padding-bottom: 0;
     min-height: 420px;
     justify-content: center;
     background-position: right bottom;
-    background-size: 167vw;
-    background-color: #fcf8f3;
+    flex-direction: column-reverse;
+    background:#fbf6f2;
   }
 `;
 
