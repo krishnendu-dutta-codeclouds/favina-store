@@ -96,7 +96,7 @@ const HomePage = () => {
               Discover skincare and makeup that loves you back.
             </HeroSubtitle>
             <HeroOfferRow>
-              <DiscountBadge>Get 25% OFF</DiscountBadge>
+              <DiscountBadge>Get 30% OFF</DiscountBadge>
               <OfferText>on your first purchase!</OfferText>
             </HeroOfferRow>
             <ShopNowBtn to="/products">Shop Now</ShopNowBtn>
