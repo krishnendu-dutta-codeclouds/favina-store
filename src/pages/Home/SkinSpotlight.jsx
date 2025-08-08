@@ -15,6 +15,8 @@ const Section = styled.section`
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
+    padding-bottom: 0;
+    padding-top: 0;
   }
 `;
 

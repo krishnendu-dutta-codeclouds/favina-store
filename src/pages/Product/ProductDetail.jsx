@@ -369,7 +369,7 @@ const ShareButton = styled.button`
 
 const ProductDetailContainer = styled.div`
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   justify-content: center;
   gap: ${pxToRem(40)};
   max-width: ${pxToRem(1100)};

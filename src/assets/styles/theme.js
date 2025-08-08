@@ -17,7 +17,7 @@ export const colors = {
   primary: "#E5A6A6",
   secondary: "#C8BFE7",
   accent: "#F6C6A7",
-  background: "#fff",
+  background: "#FFF9F4",
   sidebarBg: "#f3f0f8",
   text: "#5A4E4D",
   textLight: "#fff",
@@ -43,11 +43,11 @@ export const fontSizes = {
   base: "16px",
   md: `${clampPx(12, 5, 16, 18)}`,
   lg: `${clampPx(14, 6, 18, 24)}`,
-  xl: "32px",
-  xxl: "48px",
+  xl: `${clampPx(16, 8, 20, 32)}`,
+  xxl: `${clampPx(20, 8, 32, 48)}`,
 };
 
-
+ 
 export const gapSizes = {
 
   lg: `${clampPx(8, 2, 9, 24)}`,

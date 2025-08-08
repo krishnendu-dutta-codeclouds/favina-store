@@ -650,7 +650,7 @@ const MobileMenuHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px 20px 17px 20px;
+  padding: 10px 20px 7px 20px;
   border-bottom: 1px solid #eee;
   background: #fff;
   position: sticky;
@@ -670,7 +670,7 @@ const MobileNav = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 20px 0 0 0;
+  padding: 0 0 0 0;
 `;
 
 const MobileNavLink = styled(Link)`
@@ -683,6 +683,7 @@ const MobileNavLink = styled(Link)`
   background: none;
   text-align: left;
   cursor: pointer;
+  display:flex;
   &:hover {
     background: #f5f5f5;
     color: ${colors.primary};
@@ -711,15 +712,17 @@ const MobileDivider = styled.div`
 `;
 
 const MobileBadge = styled.span`
-  display: inline-block;
+  display: inline-flex;
   margin-left: 8px;
   background: ${colors.primary};
   color: #fff;
-  border-radius: 10px;
-  font-size: 13px;
-  padding: 2px 8px;
-  min-width: 20px;
+  border-radius: 50px;
+  font-size: 12px;
+  width: 25px;
+  height: 25px;
   text-align: center;
+  align-items: center;
+  justify-content: center;
 `;
 
 const MobileAccountSection = styled.div`

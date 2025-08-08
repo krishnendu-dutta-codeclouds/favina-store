@@ -349,7 +349,9 @@ const ProductsLayout = styled.div`
   padding: ${pxToRem(24)} 0 ${pxToRem(24)} 0;
   gap: 0;
   border-radius: ${pxToRem(14)};
-
+  @media (max-width: 900px) {
+    padding-top:0;
+  }
 `;
 
 const Sidebar = styled.aside`
@@ -631,6 +633,7 @@ const Main = styled.div`
   border-radius: 0 14px 14px 0;
   @media (max-width: 900px) {
     padding: 18px 20px 0 20px;
+    border-radius:0;
   }
 `;
 
@@ -711,7 +714,7 @@ const Pagination = styled.div`
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin: 30px 0 0 0;
+  margin: 30px 0 30px;
 `;
 
 const PageButton = styled.button`

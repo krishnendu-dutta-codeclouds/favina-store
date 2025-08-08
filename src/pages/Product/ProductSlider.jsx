@@ -2,12 +2,12 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Thumbs, Navigation } from 'swiper/modules';
 import styled from 'styled-components';
-import { pxToRem } from '../../assets/styles/theme';
+import { pxToRem, borderRadius } from '../../assets/styles/theme';
 
 const ProductImageSection = styled.div`
   width: 50%;
   background: #f9f9f9;
-  border-radius: 10px;
+  border-radius: ${borderRadius.sm};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,6 +15,10 @@ const ProductImageSection = styled.div`
   max-width: 100%;
   border: ${pxToRem(1.5)} solid #ede7f6;
   padding:${pxToRem(24)} ${pxToRem(20)} ${pxToRem(20)} ${pxToRem(16)};
+  @media (min-width: 1100px) {
+    position: sticky;
+    top: 90px;
+  }
   .swiper-slide{
       background: #fff;
       overflow: hidden;

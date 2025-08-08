@@ -25,7 +25,9 @@ const Wrapper = styled.div`
   justify-content: center;
   padding: 30px 20px;
   position: relative;
-  
+  @media (max-width: 768px) {
+    margin-bottom: 0;
+  }
 `;
 
 const Container = styled.div`

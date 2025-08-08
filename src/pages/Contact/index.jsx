@@ -85,7 +85,7 @@ const ContentWrapper = styled.div`
 border-radius: ${pxToRem(6)};
   box-shadow: 0 8px 32px 0 rgba(160,132,202,0.13), 0 2px 10px rgba(160,132,202,0.07);
   backdrop-filter: blur(10px);
-background: ${colors.background};
+background: ${colors.card};
 max-width: 1320px;
 overflow: hidden;
   display: flex;

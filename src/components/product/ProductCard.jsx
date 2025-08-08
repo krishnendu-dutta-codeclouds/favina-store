@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { useAppDispatch } from '../../redux/hooks';
 import { addToCart } from '../../redux/slices/cartSlice';
-import Button from '../common/Button';
-import { FaHeart, FaShoppingCart, FaCheck } from 'react-icons/fa';
+import { FaHeart, FaCheck } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useImageBasePath } from '../../context/ImagePathContext';
@@ -11,7 +10,6 @@ import { colors, fontSizes, pxToRem, clampPx, gapSizes, borderRadius } from '../
 
 const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
   const dispatch = useAppDispatch();
-  // Use wishlistIds from props if provided, else fallback to local state (for non-wishlist pages)
   const [wishlist, setWishlist] = useState([]);
   const isWished = wishlistIds.length ? (wishlistIds.includes(product.id) || wishlistIds.includes(String(product.id))) : wishlist.includes(product.id);
   const [toast, setToast] = useState(null);
@@ -20,22 +18,18 @@ const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
   const { isAuthenticated, user } = useAuth();
   const { items } = useCart();
 
-  // Helper to get/set wishlist as array of product IDs in localStorage per user
   const getUserWishlist = () => {
     if (!user?.id) return [];
     const allWishlists = JSON.parse(localStorage.getItem('wishlists') || '{}');
     const arr = Array.isArray(allWishlists[user.id]) ? allWishlists[user.id] : [];
-    // Always return array of product IDs (string or number)
     return arr.filter(id => !!id);
   };
   const setUserWishlist = (list) => {
     if (!user?.id) return;
-    // Ensure unique IDs
     const uniqueList = Array.from(new Set(list)).filter(id => !!id);
     const allWishlists = JSON.parse(localStorage.getItem('wishlists') || '{}');
     allWishlists[user.id] = uniqueList;
     localStorage.setItem('wishlists', JSON.stringify(allWishlists));
-    // Dispatch a custom event for instant header update
     window.dispatchEvent(new Event('wishlistChanged'));
   };
 
@@ -44,7 +38,6 @@ const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
     const handleStorage = () => setWishlist(getUserWishlist());
     window.addEventListener('storage', handleStorage);
     return () => window.removeEventListener('storage', handleStorage);
-    // eslint-disable-next-line
   }, [user?.id]);
 
   const handleAddToWishlist = (e) => {
@@ -59,7 +52,6 @@ const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
       setTimeout(() => setToast(null), 1500);
       return;
     }
-    // fallback for non-wishlist pages
     let updatedList;
     let message;
     const currentWishlist = getUserWishlist();
@@ -76,7 +68,6 @@ const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
     setTimeout(() => setToast(null), 1500);
   };
 
-  // Helper to get/set cart for current user in localStorage
   const getUserCart = () => {
     if (!user?.id) return [];
     const allCarts = JSON.parse(localStorage.getItem('carts') || '{}');
@@ -111,7 +102,6 @@ const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
     setTimeout(() => setToast(null), 1500);
   };
 
-  // Toast in document body, not inside card
   useEffect(() => {
     if (!toast) return;
     const toastDiv = document.createElement('div');
@@ -129,21 +119,17 @@ const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
     };
   }, [toast]);
 
-  // Discount calculation
   const discount =
     product.offerPrice && product.offerPrice < product.price
       ? Math.round(((product.price - product.offerPrice) / product.price) * 100)
       : null;
 
-  // Fix: Ensure correct image path for public/images usage (works in browser, not Node)
   let imageSrc = product.image;
   if (imageSrc && !imageSrc.startsWith('/') && !imageSrc.startsWith('http')) {
     imageSrc = `/${imageSrc}`;
   }
 
-  // Only navigate to product details if not clicking on add/wishlist
   const handleCardClick = (e) => {
-    // Prevent navigation if clicking on button or icon inside card
     if (
       e.target.closest('button') ||
       e.target.closest('a') ||
@@ -154,21 +140,18 @@ const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
     navigate(`/products/${product.id}`);
   };
 
-  // Helper to check if product is in cart
   const isInCart = (() => {
     if (isAuthenticated && user?.id) {
       const allCarts = JSON.parse(localStorage.getItem('carts') || '{}');
       const arr = Array.isArray(allCarts[user.id]) ? allCarts[user.id] : [];
       return arr.some(item => item.id === product.id);
     }
-    // Fallback to redux items (for guest)
     return items.some(item => item.id === product.id);
   })();
 
   return (
     <Card onClick={handleCardClick} style={{ cursor: 'pointer' }}>
       <ImageContainer>
-        {/* Wishlist button at top right of image on mobile */}
         <WishlistBtn
           aria-label="Add to wishlist"
           $wished={isWished ? 1 : 0}
@@ -530,7 +513,6 @@ const WishlistBtn = styled.button`
   }
 `;
 
-// Add global styles for the toast
 if (typeof document !== 'undefined' && !document.getElementById('global-toast-style')) {
   const style = document.createElement('style');
   style.id = 'global-toast-style';

@@ -6,6 +6,9 @@ import { colors, fontSizes, gapSizes } from '../../assets/styles/theme';
 const BeautyPicksSection = styled.section`
   padding: 40px 0;
   text-align: center;
+  @media (max-width: 768px) {
+    padding-top:0;
+  }
 `;
 
 const Container = styled.div`
