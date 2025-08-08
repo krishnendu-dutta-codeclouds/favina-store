@@ -8,7 +8,7 @@ const PromoWrapperNew = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${colors.background};
+  background: ${colors.card};
   background-image: url("/lady-promo.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -19,6 +19,7 @@ const PromoWrapperNew = styled.section`
   min-height: 39vw;
   padding: 30px 0;
   @media (max-width: 768px) {
+    margin: 50px auto 0;
     flex-direction: column;
     background-position:top left;
     padding: ${gapSizes.lg} ${gapSizes.sm};
@@ -41,6 +42,7 @@ const PromoButton = styled(Button)`
 `;
 
 const Content = styled.div`
+  background:${colors.card}
   padding: ${gapSizes.xl};
   border-radius: 12px;
   max-width: 600px;
@@ -49,6 +51,7 @@ const Content = styled.div`
   text-align: center;
   z-index: 2;
   @media (max-width: 768px) {
+  padding: 0px 20px 40px;
     &:first-child {
       min-height:100vw;
   }

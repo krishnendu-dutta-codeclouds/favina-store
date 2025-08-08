@@ -117,7 +117,7 @@ const TestimonialSection = styled.section`
   background: ${colors.background};
   @media (max-width: 768px) {
     margin-top:20px;
-    padding-top:30px;
+    padding-top:40px;
   }
 `;
 
@@ -131,8 +131,7 @@ const TestimonialTitle = styled.h3`
   letter-spacing: -1px;
   width: 100%;
   padding: 0 20px;
-  @media (max-width: 768px) {
-  margin-bottom: 0px;}
+
   span {
     color: #e5a6a6;
     font-family: ${fonts.title};
