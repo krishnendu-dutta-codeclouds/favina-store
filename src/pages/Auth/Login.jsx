@@ -1,4 +1,3 @@
-
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAuth } from '../../redux/hooks';
@@ -41,6 +40,7 @@ const LoginPage = () => {
           <FormInput
             label="Email"
             type="email"
+            placeholder="Enter your email address"
             {...register('email', {
               required: 'Email is required',
               pattern: {
@@ -53,6 +53,7 @@ const LoginPage = () => {
           <FormInput
             label="Password"
             type="password"
+            placeholder="Enter your password"
             {...register('password', {
               required: 'Password is required',
               minLength: {

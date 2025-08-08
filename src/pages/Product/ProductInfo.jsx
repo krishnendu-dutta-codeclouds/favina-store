@@ -241,7 +241,7 @@ function Accordion() {
             {item.title}
             <span style={{transform: openIndex === idx ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s', marginLeft: 8}}>
               <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1 1L6 6L11 1" stroke="#5A4E4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1 1L6 6L11 1" stroke="#5A4E4D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
 
 

@@ -15,7 +15,7 @@ const Footer = () => {
           <Form>
             <EmailInput placeholder="Enter email address" />
             <SendButton><svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M9.24954 11.3833L11.875 7.29998L9.24954 3.21664H2.125L4.751 7.29998L2.125 11.3833H9.24954Z" stroke="#FFF9F4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.24954 11.3833L11.875 7.29998L9.24954 3.21664H2.125L4.751 7.29998L2.125 11.3833H9.24954Z" stroke="#FFF9F4" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
  Send</SendButton>
           </Form>

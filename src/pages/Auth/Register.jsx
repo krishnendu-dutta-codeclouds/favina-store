@@ -37,11 +37,13 @@ const RegisterPage = () => {
           <FormGroup>
             <FormInput
               label="First Name"
+              placeholder="Enter your first name"
               {...formRegister('firstName', { required: 'First name is required' })}
               error={errors.firstName}
             />
             <FormInput
               label="Last Name"
+              placeholder="Enter your last name"
               {...formRegister('lastName', { required: 'Last name is required' })}
               error={errors.lastName}
             />
@@ -49,6 +51,7 @@ const RegisterPage = () => {
           <FormInput
             label="Email"
             type="email"
+            placeholder="Enter your email address"
             {...formRegister('email', {
               required: 'Email is required',
               pattern: {
@@ -61,6 +64,7 @@ const RegisterPage = () => {
           <FormInput
             label="Password"
             type="password"
+            placeholder="Create a password"
             {...formRegister('password', {
               required: 'Password is required',
               minLength: {
@@ -73,6 +77,7 @@ const RegisterPage = () => {
           <FormInput
             label="Confirm Password"
             type="password"
+            placeholder="Confirm your password"
             {...formRegister('confirmPassword', {
               required: 'Please confirm your password',
               validate: (value) =>
