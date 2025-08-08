@@ -142,7 +142,7 @@ const Header = () => {
       </Banner>
       <Container>
         <Logo to="/" title="Go to Home">
-          <OptimizedImage src={LogoSvg} alt="ShopEase Logo" width={38} height={38} />
+          <OptimizedImage loading="eager" fetchPriority="high" src={LogoSvg} alt="ShopEase Logo" width={38} height={38} />
         </Logo>
         <Nav>
           <NavLink to="/" title="Home">Home</NavLink>

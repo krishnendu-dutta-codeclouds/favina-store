@@ -8,6 +8,8 @@ const OptimizedImage = ({
   srcSet,
   sizes,
   style,
+  fetchPriority,
+  loading,
   className,
   fallback = '/fallback.png', // fallback image path in public/
   ...props
@@ -20,7 +22,8 @@ const OptimizedImage = ({
       alt={alt}
       width={width}
       height={height}
-      loading="lazy"
+      fetchPriority={fetchPriority || 'auto'}
+      loading={loading || 'lazy'}
       srcSet={srcSet}
       sizes={sizes}
       style={style}
