@@ -8,6 +8,7 @@ import Footer from './components/common/Footer';
 import CartSidebar from './components/cart/CartSidebar';
 import ScrollToTop from './components/common/ScrollToTop';
 import { ImagePathContext } from './context/ImagePathContext';
+import { CartQuantityProvider } from './context/CartQuantityContext';
 
 const BASE_PATH = '/';
 
@@ -16,15 +17,17 @@ const App = () => {
     <Provider store={store}>
       <GlobalStyles />
       <ImagePathContext.Provider value={BASE_PATH}>
-        <Router>
-          <ScrollToTop />
-          <Header />
-          <main>
-            <AppRoutes />
-          </main>
-          <Footer />
-          <CartSidebar />
-        </Router>
+        <CartQuantityProvider>
+          <Router>
+            <ScrollToTop />
+            <Header />
+            <main>
+              <AppRoutes />
+            </main>
+            <Footer />
+            <CartSidebar />
+          </Router>
+        </CartQuantityProvider>
       </ImagePathContext.Provider>
     </Provider>
   );

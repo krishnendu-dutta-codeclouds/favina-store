@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Button from './Button';
+import OptimizedImage from './OptimizedImage';
 import { colors, fontSizes, fonts, pxToRem, pxToMax, clampPx, gapSizes } from '../../assets/styles/theme';
 import txtBg1 from '../../assets/images/txt-bg1.png';
 const PromoBanner = ({
@@ -20,7 +21,7 @@ const PromoBanner = ({
 }) => (
   <BannerWrapper>
     <Banner>
-      <BannerImage src={image} alt={`${titlePink} ${titlePurple}`} />
+      <BannerImage src={image} alt={`${titlePink} ${titlePurple}`} width={600} height={320} />
       <BannerContent>
         <BannerTitle>
           <BannerTitlePink>{titlePink}</BannerTitlePink>

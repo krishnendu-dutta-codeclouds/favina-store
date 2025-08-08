@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import RatingBox from '../../components/common/RatingBox';
 import bgTestimonial from '../../assets/images/pawel-czerwinski-fcZU7mRWImY-unsplash1.png';
+import OptimizedImage from '../../components/common/OptimizedImage';
 
 
 const CustomTestimonialSectionWrapper = styled.section`

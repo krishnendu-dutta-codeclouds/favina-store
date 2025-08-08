@@ -3,13 +3,14 @@ import LogoSvg from '../../assets/images/logo.svg';
 import { Link } from 'react-router-dom';
 import { colors, fontSizes } from '../../assets/styles/theme';
 import { FaInstagram, FaFacebook, FaYoutube, FaPinterest } from 'react-icons/fa';
+import OptimizedImage from '../common/OptimizedImage';
 
 const Footer = () => {
   return (
     <FooterContainer>
       <MainContent>
         <LeftSection>
-          <LogoImg src={LogoSvg} alt="Favina Cosmetics" />
+          <LogoImg src={LogoSvg} alt="Favina Cosmetics" width={38} height={38} />
           <PromoText>Get 10% OFF your first order!</PromoText>
           <SmallText>Subscribe to get exclusive offers, tips & early access to new arrivals.</SmallText>
           <Form>
@@ -90,8 +91,8 @@ const LeftSection = styled.div`
 
 const LogoImg = styled.img`
   height: 38px;
-  width: 106px;
-  margin-bottom: 20px;
+  width: auto;
+  display: block;
 `;
 
 const PromoText = styled.h4`

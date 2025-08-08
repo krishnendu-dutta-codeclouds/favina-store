@@ -7,6 +7,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useImageBasePath } from '../../context/ImagePathContext';
 import { useAuth, useCart } from '../../redux/hooks';
 import { colors, fontSizes, pxToRem, clampPx, gapSizes, borderRadius } from '../../assets/styles/theme';
+import OptimizedImage from '../common/OptimizedImage';
 
 const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
   const dispatch = useAppDispatch();
@@ -160,7 +161,7 @@ const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
         >
           <FaHeart />
         </WishlistBtn>
-        <Image src={imageSrc} alt={product.title} />
+        <OptimizedImage src={imageSrc} alt={product.title} width={500} height={500} />
       </ImageContainer>
       <Details>
         <DetailsHeader>

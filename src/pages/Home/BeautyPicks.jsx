@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { colors, fontSizes, gapSizes } from '../../assets/styles/theme';
+import OptimizedImage from '../../components/common/OptimizedImage';
 
 const BeautyPicksSection = styled.section`
   padding: 40px 0;
@@ -116,7 +117,7 @@ const BeautyPicks = () => {
         {cardData.map((card, index) => (
           <Link to="/products" key={index} style={{ textDecoration: 'none' }}>
             <Card>
-              <CardImage src={card.image} alt={card.title} />
+              <OptimizedImage src={card.image} alt={card.title} width={260} height={180} />
               <CardText>
                 <p>{card.title}</p>
                 <strong>{card.offer}</strong>

@@ -1,4 +1,3 @@
-
 import styled, { createGlobalStyle } from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -18,6 +17,7 @@ import { colors, fontSizes, pxToRem, fonts, gapSizes } from '../../assets/styles
 import CustomTestimonialSection from './CustomTestimonialSection';
 import ProductSlider from './ProductSlider';
 import ProductInfo, { CheckoutCardInfo, CheckoutCardInfoTitle } from './ProductInfo';
+import { useCartQuantity } from '../../context/CartQuantityContext';
 
 const SwiperNavStyles = createGlobalStyle`
   .product-detail-swiper .swiper-button-next,
@@ -57,6 +57,13 @@ const ProductDetail = () => {
   const [wishlist, setWishlist] = useState([]);
   const [toast, setToast] = useState(null);
   const [isInCart, setIsInCart] = useState(false);
+  const { getQuantity, setQuantity: setGlobalQuantity } = useCartQuantity();
+
+  useEffect(() => {
+    if (product && product.id) {
+      setQuantity(getQuantity(product.id));
+    }
+  }, [product, getQuantity]);
 
   useEffect(() => {
     if (!product || !user?.id) return;
@@ -112,6 +119,7 @@ const ProductDetail = () => {
     const exists = userCart.find(item => item.id === product.id);
     if (exists) {
       setQuantity(exists.quantity);
+      setGlobalQuantity(product.id, exists.quantity);
       updatedCart = userCart;
       dispatch(toggleCart()); // Open cart sidebar
       
@@ -121,6 +129,7 @@ const ProductDetail = () => {
       if (isAuthenticated) {
         setUserCart(updatedCart);
       }
+      setGlobalQuantity(product.id, quantity);
       dispatch(addToCart({ ...product, quantity }));
       dispatch(toggleCart()); // Open cart sidebar
       setIsInCart(true);
@@ -135,10 +144,12 @@ const ProductDetail = () => {
     let updatedCart;
     const userCart = getUserCart();
     const exists = userCart.find(item => item.id === product.id);
+    let newQty = quantity;
     if (exists) {
+      newQty = exists.quantity + quantity;
       updatedCart = userCart.map(item =>
         item.id === product.id
-          ? { ...item, quantity: item.quantity + quantity }
+          ? { ...item, quantity: newQty }
           : item
       );
     } else {
@@ -147,7 +158,8 @@ const ProductDetail = () => {
     if (isAuthenticated) {
       setUserCart(updatedCart);
     }
-    dispatch(addToCart({ ...product, quantity }));
+    setGlobalQuantity(product.id, newQty);
+    dispatch(addToCart({ ...product, quantity: newQty }));
     
     navigate('/checkout');
   };

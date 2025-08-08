@@ -9,6 +9,7 @@ import LogoSvg from '../../assets/images/logo.svg';
 import productData from '../../data/product.json';
 import { useImageBasePath } from '../../context/ImagePathContext';
 import { colors, fontSizes, borderRadius } from '../../assets/styles/theme';
+import OptimizedImage from '../common/OptimizedImage';
 
 
 
@@ -140,7 +141,7 @@ const Header = () => {
       <HeaderContainer>
       <Container>
         <Logo to="/" title="Go to Home">
-          <LogoImg src={LogoSvg} alt="ShopEase Logo" />
+          <OptimizedImage src={LogoSvg} alt="ShopEase Logo" width={38} height={38} />
         </Logo>
         <Nav>
           <NavLink to="/" title="Home">Home</NavLink>
@@ -261,11 +262,11 @@ const Header = () => {
                         navigate(`/products/${product.id}`);
                       }}
                     >
-                      <ResultImg src={
+                      <OptimizedImage src={
                         product.image && !product.image.includes('/') && product.image
                           ? `${imageBasePath}/${product.image}`
                           : product.image
-                      } alt={product.title} />
+                      } alt={product.title} width={48} height={48} />
                       <ResultInfo>
                         <ResultTitle>{product.title}</ResultTitle>
                         <ResultPrice>${product.price.toFixed(2)}</ResultPrice>
@@ -284,7 +285,7 @@ const Header = () => {
           <MobileMenu>
             <MobileMenuHeader>
               <Logo to="/" onClick={() => setMobileMenuOpen(false)}>
-                <LogoImg src={LogoSvg} alt="ShopEase Logo" />
+                <OptimizedImage src={LogoSvg} alt="ShopEase Logo" width={38} height={38} />
               </Logo>
               <MobileMenuClose
                 aria-label="Close menu"
@@ -365,13 +366,6 @@ const Logo = styled(Link)`
   display: flex;
   align-items: center;
   padding: 10px 0;
-`;
-
-const LogoImg = styled.img`
-  height: 38px;
-  width: auto;
-  display: block;
-
 `;
 
 const Nav = styled.nav`
