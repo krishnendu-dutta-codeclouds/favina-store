@@ -1,0 +1,175 @@
+{
+  "products": [
+   
+    {
+      "id": 1,
+      "title": "Matte Liquid Lipstick",
+      "price": 65.00,
+      "offerPrice": 55.00,
+      "image": "/kay-nail-polish2.png",
+      "images": ["/kay-nail-polish2.png", "/kay-nail-polish2.png", "/kay-nail-polish2.png", "/kay-nail-polish2.png", "/kay-nail-polish2.png"],
+      "category": "Makeup",
+      "rating": 4.4,
+      "testimonials": [
+        {
+          "name": "Emily R.",
+          "text": "The matte lipstick is my new favorite! Stays all day and feels light."
+          
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Volumizing Mascara",
+      "price": 70.00,
+      "offerPrice": 60.00,
+      "image": "/matt1.png",
+      "images": ["/matt1.png", "/matt1.png", "/matt1.png", "/matt1.png"],
+      "category": "Makeup",
+      "rating": 4.1,
+      "testimonials": [
+        {
+          "name": "Jessica P.",
+          "text": "Love the volumizing mascara, my lashes look amazing!"
+          
+        }
+      ]
+    },
+
+    {
+      "id": 2,
+      "title": "L'Oreal Paris Revitalift Serum",
+      "price": 120.00,
+      "offerPrice": 100.00,
+      "image": "/ce6cb41LOREA00000002_1.jpg",
+      "images": ["/ce6cb41LOREA00000002_1.jpg", "/ce6cb41LOREA00000002_1.jpg", "/ce6cb41LOREA00000002_1.jpg", "/ce6cb41LOREA00000002_1.jpg"],
+      "category": "Skincare",
+      "rating": 5.0,
+      "testimonials": [
+        {
+          "name": "Ashley N.",
+          "text": "Hydrating face serum made my skin glow!"
+          
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Cerave AM Facial Moisturizing Lotion With Sunscreen",
+      "price": 80.00,
+      "offerPrice": 65.00,
+      "image": "/52690dfCERAV00000044_1a.jpg",
+      "images": ["/52690dfCERAV00000044_1a.jpg", "/52690dfCERAV00000044_1a.jpg", "/52690dfCERAV00000044_1a.jpg", "/52690dfCERAV00000044_1a.jpg"],
+      "category": "Skincare",
+      "rating": 4.5,
+      "testimonials": [
+        {
+          "name": "Lauren P.",
+          "text": "Moisturizing day cream is light and non-greasy."
+          
+        }
+      ]
+    },
+
+    {
+      "id": 4,
+      "title": "L'Oreal Paris Extraordinary Oil Nourishing Shampoo",
+      "price": 55.00,
+      "offerPrice": 50.00,
+      "image": "/ace06428901526588978_1.jpg",
+      "images": ["/ace06428901526588978_1.jpg", "/ace06428901526588978_1.jpg", "/ace06428901526588978_1.jpg", "/ace06428901526588978_1.jpg"],
+      "category": "Haircare",
+      "rating": 3.0,
+      "testimonials": [
+        {
+          "name": "Megan M.",
+          "text": "Nourishing shampoo made my hair so soft and shiny!"
+          
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Livon Style Pro Curl Cream",
+      "price": 75.00,
+      "offerPrice": 60.00,
+      "image": "/ceeb628LIVON00000019_1.jpg",
+      "images": ["/ceeb628LIVON00000019_1.jpg", "/ceeb628LIVON00000019_1.jpg", "/ceeb628LIVON00000019_1.jpg", "/ceeb628LIVON00000019_1.jpg"],
+      "category": "Haircare",
+      "rating": 3.8,
+      "testimonials": [
+        {
+          "name": "Samantha T.",
+          "text": "Curl defining cream works wonders for my curls."
+          
+        }
+      ]
+    },
+
+  
+    {
+      "id": 5,
+      "title": "Rose Eau de Parfum",
+      "price": 150.00,
+      "offerPrice": 120.00,
+      "image": "/a7531a53614272629370_1.jpg",
+      "images": ["/a7531a53614272629370_1.jpg", "/a7531a53614272629370_1.jpg", "/a7531a53614272629370_1.jpg", "/a7531a53614272629370_1.jpg"],
+      "category": "Fragrance",
+      "rating": 4.8,
+      "testimonials": [
+        {
+          "name": "Rachel V.",
+          "text": "Rose Eau de Parfum smells divine and lasts all day."
+          
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Bella Vita Senorita Woman Body Mist",
+      "price": 90.00,
+      "offerPrice": 70.00,
+      "image": "/b506d62BELAB00000378_1.jpg",
+      "images": ["/b506d62BELAB00000378_1.jpg", "/b506d62BELAB00000378_1.jpg", "/b506d62BELAB00000378_1.jpg", "/b506d62BELAB00000378_1.jpg"],
+      "category": "Fragrance",
+      "rating": 4.0,
+      "testimonials": [
+        {
+          "name": "Hannah L.",
+          "text": "Floral body mist is so refreshing and light."
+          
+        }
+      ]
+    },
+
+    
+    {
+      "id": 7,
+      "title": "MARS Professional Makeup Brush - Set Of 12",
+      "price": 110.00,
+      "offerPrice": 90.00,
+      "image": "/f674195MARSX00000882-new_1.jpg",
+      "images": ["/f674195MARSX00000882-new_1.jpg", "/f674195MARSX00000882-new_1.jpg", "/f674195MARSX00000882-new_1.jpg", "/f674195MARSX00000882-new_1.jpg"],
+      "category": "Tools",
+      "rating": 4.0,
+      "testimonials": []
+    },
+    {
+      "id": 20,
+      "title": "Bronson Professional Beauty Blender Sponge Makeup Applicator, Puffs",
+      "price": 50.00,
+      "offerPrice": 55.00,
+      "image": "/e71c2dd7452225850152_1.jpeg",
+      "images": ["/e71c2dd7452225850152_1.jpeg", "/e71c2dd7452225850152_1.jpeg", "/e71c2dd7452225850152_1.jpeg", "/e71c2dd7452225850152_1.jpeg"],
+      "category": "Tools",
+      "rating": 4.4,
+      "testimonials": [
+        {
+          "name": "Olivia T.",
+          "text": "Blends foundation flawlessly!"
+          
+        }
+      ]
+    }
+  ]
+}
