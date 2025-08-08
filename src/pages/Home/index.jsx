@@ -127,6 +127,8 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  position: relative;
+  z-index: 1;
   & > * {
     flex: 1;
     width: 100%;
@@ -138,9 +140,7 @@ const HeroSection = styled.section`
   width: 100%;
   min-height: 40vh;
   padding: 100px 30px 100px;
-  //background: url(${props => props.$banner}) no-repeat;
-  background-size: cover;
-  background-position:center;
+  background: linear-gradient(45deg, #fcfaf7, #f2eae0);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -152,7 +152,7 @@ const HeroSection = styled.section`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -1;
+    z-index: 0;
     @media (max-width: 900px) {
         z-index: 0;
         height: 63vw;
