@@ -133,12 +133,13 @@ const Header = () => {
 
   return (
     <>
-      <Banner>
+      
+      <HeaderContainer>
+        <Banner>
         <Carousel>
           Get 30% off on your first order! Use code: <PromoCode>SAVE30</PromoCode>
         </Carousel>
       </Banner>
-      <HeaderContainer>
       <Container>
         <Logo to="/" title="Go to Home">
           <OptimizedImage src={LogoSvg} alt="ShopEase Logo" width={38} height={38} />
@@ -365,7 +366,7 @@ const Logo = styled(Link)`
   text-decoration: none;
   display: flex;
   align-items: center;
-  padding: 10px 0;
+  padding: 15px 0;
 `;
 
 const Nav = styled.nav`
@@ -846,21 +847,21 @@ const SearchResultItem = styled.div`
   align-items: center;
   gap: 14px;
   padding: 10px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid ${colors.border};
   cursor: pointer;
   transition: background 0.13s;
+  img{
+    width: 48px;
+    object-fit: contain;
+  border-radius: 7px;
+  background: #fafafa;
+  }
   &:hover {
     background: #f7f7f7;
   }
 `;
 
-const ResultImg = styled.img`
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-  border-radius: 7px;
-  background: #fafafa;
-`;
+
 
 const ResultInfo = styled.div`
   flex: 1;
