@@ -162,7 +162,7 @@ const HeroSection = styled.section`
   padding: 100px 30px 100px;
   background: url(${props => props.$banner}) no-repeat;
   background-size: cover;
-  background-position: left center;
+  background-position:center;
   display: flex;
   align-items: center;
   justify-content: flex-start;
