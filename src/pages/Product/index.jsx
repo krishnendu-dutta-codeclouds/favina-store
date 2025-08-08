@@ -351,6 +351,7 @@ const ProductsLayout = styled.div`
   border-radius: ${pxToRem(14)};
   @media (max-width: 900px) {
     padding-top:0;
+    padding-bottom:0;
   }
 `;
 
