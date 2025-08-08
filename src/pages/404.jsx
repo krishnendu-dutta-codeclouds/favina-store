@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Button from '../components/common/Button';
+import { colors } from '../assets/styles/theme';
 
 const NotFoundPage = () => {
   return (
@@ -30,7 +31,7 @@ const Container = styled.div`
 const ErrorCode = styled.h1`
   font-size: 120px;
   margin: 0;
-  color: #333;
+  color: ${colors.text};
   line-height: 1;
   
   @media (max-width: 768px) {
@@ -41,7 +42,7 @@ const ErrorCode = styled.h1`
 const ErrorMessage = styled.h2`
   font-size: 32px;
   margin: 20px 0 10px;
-  color: #333;
+  color: ${colors.text};
   
   @media (max-width: 768px) {
     font-size: 24px;

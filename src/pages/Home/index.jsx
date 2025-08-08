@@ -5,12 +5,10 @@ import Button from '../../components/common/Button';
 import Testimonials from '../../components/common/Testimonials';
 import productData from '../../data/product.json';
 import bannerImg from '../../assets/images/Banner.jpg';
-import { useImageBasePath } from '../../context/ImagePathContext';
 import TextSliderWrapper from '../../components/common/TextSliderWrapper';
 import PromoBanner, { BannerHighlight } from '../../components/common/PromoBanner';
 import promoImg from '../../assets/images/main-bg1.png';
-import { Link } from 'react-router-dom';
-import { colors, fontSizes, fonts, pxToRem } from '../../assets/styles/theme';
+import { colors, fontSizes, fonts } from '../../assets/styles/theme';
 import BeautyPicks from './BeautyPicks';
 import SkinSpotlight from './SkinSpotlight';
 import NewPromoSection from '../../components/common/NewPromoSection';
@@ -24,43 +22,13 @@ const sliderMessages = [
   { text: "Glow & Save", highlight: false }
 ];
 
-const beautyPicks = [
-  {
-    image: '/assets/images/beauty-pick-1.png',
-    label: 'On Best Seller',
-    offer: 'Up To 20% Off',
-    to: '/products',
-    desc: '',
-  },
-  {
-    image: '/assets/images/beauty-pick-2.png',
-    label: 'Sampoo and Mask',
-    offer: 'Up To 30% Off',
-    to: '/products',
-    desc: '',
-  },
-  {
-    image: '/assets/images/beauty-pick-3.png',
-    label: 'On Kay Bestseller',
-    offer: 'Up To 40% Off',
-    to: '/products',
-    desc: '',
-  },
-  {
-    image: '/assets/images/beauty-pick-4.png',
-    label: 'On Best Seller',
-    offer: 'Up To 35% Off',
-    to: '/products',
-    desc: '',
-  },
-];
+
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [loading, setLoading] = useState(true);
-  const imageBasePath = useImageBasePath();
-
+  
   useEffect(() => {
     setProducts(productData.products || []);
     const allTestimonials = [];
@@ -258,7 +226,7 @@ const ShopNowBtn = styled(Button)`
   border-radius: 7px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   background: #fff;
-  color: #5b4a44;
+  color: ${colors.text};
   border: none;
   
 `;

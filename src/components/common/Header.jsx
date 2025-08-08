@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { FaShoppingCart, FaUser, FaHeart, FaBars, FaTimes, FaPencilAlt, FaSearch } from 'react-icons/fa';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import { useAppDispatch, useCart, useAuth } from '../../redux/hooks';
 import { toggleCart } from '../../redux/slices/cartSlice';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
