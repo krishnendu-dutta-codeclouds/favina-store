@@ -10,6 +10,7 @@ import productData from '../../data/product.json';
 import { useImageBasePath } from '../../context/ImagePathContext';
 import { colors, fontSizes, borderRadius } from '../../assets/styles/theme';
 import OptimizedImage from '../common/OptimizedImage';
+import { useSelector } from 'react-redux';
 
 
 
@@ -19,7 +20,7 @@ const Header = () => {
   const location = useLocation(); 
   const { isAuthenticated, user } = useAuth();
   const { items } = useCart();
-  const [cartCount, setCartCount] = useState(0);
+  const cartCount = useSelector(state => state.cart.cartCount);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [userDropdownDisplay, setUserDropdownDisplay] = useState(window.innerWidth <= 900 ? 'none' : 'flex');
   const [wishlistCount, setWishlistCount] = useState(0);
@@ -46,15 +47,6 @@ const Header = () => {
     return arr.filter(id => !!id).length;
   };
 
-  const getCartCount = () => {
-    if (isAuthenticated && user?.id) {
-      const allCarts = JSON.parse(localStorage.getItem('carts') || '{}');
-      const arr = Array.isArray(allCarts[user.id]) ? allCarts[user.id] : [];
-      return arr.reduce((sum, item) => sum + (item.quantity || 1), 0);
-    }
-    return items.reduce((sum, item) => sum + (item.quantity || 1), 0);
-  };
-
   useEffect(() => {
     const updateWishlistCount = () => {
       setWishlistCount(getWishlistCount());
@@ -74,20 +66,6 @@ const Header = () => {
   useEffect(() => {
     setWishlistCount(getWishlistCount());
   }, [location, user?.id]);
-
-  useEffect(() => {
-    const updateCartCount = () => {
-      setCartCount(getCartCount());
-    };
-    updateCartCount();
-    window.addEventListener('storage', updateCartCount);
-    window.addEventListener('cartChanged', updateCartCount);
-    return () => {
-      window.removeEventListener('storage', updateCartCount);
-      window.removeEventListener('cartChanged', updateCartCount);
-    };
-    // eslint-disable-next-line
-  }, [isAuthenticated, user?.id, items.length]);
 
   useEffect(() => {
     if (mobileMenuOpen) {

@@ -8,6 +8,7 @@ import { useImageBasePath } from '../../context/ImagePathContext';
 import { useAuth, useCart } from '../../redux/hooks';
 import { colors, fontSizes, pxToRem, clampPx, gapSizes, borderRadius } from '../../assets/styles/theme';
 import OptimizedImage from '../common/OptimizedImage';
+import { useSelector } from 'react-redux'; // <-- useSelector from react-redux
 
 const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
   const dispatch = useAppDispatch();
@@ -18,6 +19,9 @@ const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
   const { items } = useCart();
+
+  // Use Redux cart items for isInCart so it updates with cartSlice
+  const cartItems = useSelector(state => state.cart.items);
 
   const getUserWishlist = () => {
     if (!user?.id) return [];
@@ -141,14 +145,8 @@ const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
     navigate(`/products/${product.id}`);
   };
 
-  const isInCart = (() => {
-    if (isAuthenticated && user?.id) {
-      const allCarts = JSON.parse(localStorage.getItem('carts') || '{}');
-      const arr = Array.isArray(allCarts[user.id]) ? allCarts[user.id] : [];
-      return arr.some(item => item.id === product.id);
-    }
-    return items.some(item => item.id === product.id);
-  })();
+  // Replace isInCart logic:
+  const isInCart = cartItems.some(item => item.id === product.id);
 
   return (
     <Card onClick={handleCardClick} style={{ cursor: 'pointer' }}>
@@ -199,16 +197,14 @@ const ProductCard = ({ product, wishlistIds = [], onToggleWishlist }) => {
           $tick={isInCart}
         >
           {isInCart ? 
-          
-          <FaCheck style={{ color: '#fff' }} /> 
-          : 
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8.04902 18.9445C8.98846 18.9445 9.75002 18.1829 9.75002 17.2435C9.75002 16.304 8.98846 15.5425 8.04902 15.5425C7.10959 15.5425 6.34802 16.304 6.34802 17.2435C6.34802 18.1829 7.10959 18.9445 8.04902 18.9445Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M15.46 18.9445C16.3994 18.9445 17.161 18.1829 17.161 17.2435C17.161 16.304 16.3994 15.5425 15.46 15.5425C14.5205 15.5425 13.759 16.304 13.759 17.2435C13.759 18.1829 14.5205 18.9445 15.46 18.9445Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M4.106 3.74934L6.116 10.1133C6.425 11.0913 6.579 11.5803 6.876 11.9423C7.136 12.2623 7.475 12.5093 7.858 12.6623C8.293 12.8353 8.805 12.8353 9.831 12.8353H13.686C14.712 12.8353 15.224 12.8353 15.658 12.6623C16.042 12.5093 16.38 12.2623 16.641 11.9423C16.937 11.5803 17.091 11.0913 17.401 10.1133L17.81 8.81734L18.05 8.05134L18.381 7.00134C18.4991 6.62684 18.5274 6.22978 18.4634 5.84233C18.3995 5.45489 18.2452 5.08795 18.013 4.77125C17.7809 4.45455 17.4774 4.19699 17.1271 4.01945C16.7768 3.84191 16.3897 3.74937 15.997 3.74934H4.106ZM4.106 3.74934L4.095 3.71234C4.05277 3.57089 4.00608 3.43082 3.955 3.29234C3.75255 2.77988 3.40923 2.33516 2.96473 2.00956C2.52022 1.68397 1.99266 1.49078 1.443 1.45234C1.34 1.44434 1.227 1.44434 1 1.44434" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+            <FaCheck style={{ color: '#fff' }} /> 
+            : 
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.04902 18.9445C8.98846 18.9445 9.75002 18.1829 9.75002 17.2435C9.75002 16.304 8.98846 15.5425 8.04902 15.5425C7.10959 15.5425 6.34802 16.304 6.34802 17.2435C6.34802 18.1829 7.10959 18.9445 8.04902 18.9445Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M15.46 18.9445C16.3994 18.9445 17.161 18.1829 17.161 17.2435C17.161 16.304 16.3994 15.5425 15.46 15.5425C14.5205 15.5425 13.759 16.304 13.759 17.2435C13.759 18.1829 14.5205 18.9445 15.46 18.9445Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M4.106 3.74934L6.116 10.1133C6.425 11.0913 6.579 11.5803 6.876 11.9423C7.136 12.2623 7.475 12.5093 7.858 12.6623C8.293 12.8353 8.805 12.8353 9.831 12.8353H13.686C14.712 12.8353 15.224 12.8353 15.658 12.6623C16.042 12.5093 16.38 12.2623 16.641 11.9423C16.937 11.5803 17.091 11.0913 17.401 10.1133L17.81 8.81734L18.05 8.05134L18.381 7.00134C18.4991 6.62684 18.5274 6.22978 18.4634 5.84233C18.3995 5.45489 18.2452 5.08795 18.013 4.77125C17.7809 4.45455 17.4774 4.19699 17.1271 4.01945C16.7768 3.84191 16.3897 3.74937 15.997 3.74934H4.106ZM4.106 3.74934L4.095 3.71234C4.05277 3.57089 4.00608 3.43082 3.955 3.29234C3.75255 2.77988 3.40923 2.33516 2.96473 2.00956C2.52022 1.68397 1.99266 1.49078 1.443 1.45234C1.34 1.44434 1.227 1.44434 1 1.44434" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           }
-          
         </IconButton>
         <ViewButton
           as={Link}
