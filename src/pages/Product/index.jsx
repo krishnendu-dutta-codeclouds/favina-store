@@ -1,5 +1,3 @@
-
-
 import styled from 'styled-components';
 import Button from '../../components/common/Button';
 import Checkbox from '../../components/ui/CustomCheckbox';
@@ -11,6 +9,8 @@ import { useLocation } from 'react-router-dom';
 import ProductGrid from '../../components/product/ProductGrid';
 import productData from '../../data/product.json';
 import { FaFilter } from 'react-icons/fa';
+import { useCart } from '../../redux/hooks'; // <-- Add this import
+import { useSelector } from 'react-redux';
 
 const categories = ['Makeup', 'Skincare', 'Haircare', 'Fragrance', 'Tools'];
 

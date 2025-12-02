@@ -9,7 +9,16 @@ const OrderConfirmation = () => {
   const [order, setOrder] = useState(null);
 
   useEffect(() => {
-    setOrder(getOrderById(orderId));
+    // Try sessionStorage first (from checkout), fallback to localStorage orders
+    const storedOrder = sessionStorage.getItem(`order_${orderId}`);
+    if (storedOrder) {
+      setOrder(JSON.parse(storedOrder));
+      return;
+    }
+    // fallback: search in localStorage orders
+    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+    const found = orders.find(o => o.id === orderId);
+    setOrder(found || null);
   }, [orderId]);
 
   if (!order) {

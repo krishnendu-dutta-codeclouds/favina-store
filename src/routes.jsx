@@ -12,6 +12,7 @@ import NotFound from './pages/404';
 import Wishlist from './pages/Wishlist/index.jsx';
 import Contact from './pages/Contact/index.jsx';
 import OrderConfirmation from './pages/OrderConfirmation.jsx';
+import CartPage from './pages/Cart';
 
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -32,6 +33,7 @@ const AppRoutes = () => (
       <Route path="products/:id" element={<ProductDetail />} />
       <Route path="wishlist" element={<Wishlist />} />
       <Route path="contact" element={<Contact />} />
+      <Route path="cart" element={<CartPage />} />
       <Route path="checkout" element={
         <PrivateRoute>
           <Checkout />

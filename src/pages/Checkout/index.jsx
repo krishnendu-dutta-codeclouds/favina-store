@@ -11,29 +11,25 @@ import 'swiper/css/navigation';
 import bgHeader from '../../assets/images/detail-main-bg2.png';
 import OrderSummary from './OrderSummary';
 import PaymentSection from './PaymentSection';
+import { useSelector, useDispatch } from 'react-redux';
+import { clearCart } from '../../redux/slices/cartSlice';
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+  const dispatch = useDispatch();
 
-  const getUserCart = () => {
-    if (!user?.id) return [];
-    const allCarts = JSON.parse(localStorage.getItem('carts') || '{}');
-    const arr = Array.isArray(allCarts[user.id]) ? allCarts[user.id] : [];
-    return arr;
-  };
-  const { items: reduxItems } = useCart();
-  const items = isAuthenticated ? getUserCart() : reduxItems;
+  // Always use redux store for cart items
+  const reduxItems = useSelector(state => state.cart.items);
 
-  const [orderItems, setOrderItems] = useState(items);
+  // Use reduxItems for order summary and form
+  const [orderItems, setOrderItems] = useState(reduxItems);
 
   useEffect(() => {
-    if (orderItems.length === 0) {
-      navigate('/');
-    }
-  }, [orderItems, navigate]);
+    setOrderItems(reduxItems);
+  }, [reduxItems]);
 
   const [shownUpsellIds, setShownUpsellIds] = useState([]);
 
@@ -89,6 +85,35 @@ const CheckoutPage = () => {
   const platformCharge = subtotal > 0 ? 5.00 : 0;
   const total = subtotal - discount + platformCharge;
 
+  // Remove this useEffect:
+  // useEffect(() => {
+  //   if (orderItems.length === 0) {
+  //     navigate('/');
+  //   }
+  // }, [orderItems, navigate]);
+
+  // Add a handler for placing order and redirecting with order details
+  const handlePlaceOrder = (orderData) => {
+    // Generate a random orderId for demonstration
+    const orderId = Date.now().toString();
+
+    // Prepare order details to pass to confirmation page
+    const orderDetails = {
+      ...orderData,
+      id: orderId,
+      items: orderItems,
+      total,
+      status: 'pending',
+      date: new Date().toISOString(),
+    };
+
+    // Save order details to sessionStorage for retrieval in OrderConfirmation
+    sessionStorage.setItem(`order_${orderId}`, JSON.stringify(orderDetails));
+
+    dispatch(clearCart());
+    navigate(`/order-confirmation/${orderId}`);
+  };
+
   return (
     <>
     <CheckoutHeader>
@@ -96,7 +121,11 @@ const CheckoutPage = () => {
     </CheckoutHeader>
     <CheckoutLayout>
       <FormSection>
-        <CheckoutForm discountedTotal={total} orderItems={orderItems} />
+        <CheckoutForm
+          discountedTotal={total}
+          orderItems={orderItems}
+          onPlaceOrder={handlePlaceOrder}
+        />
         <PaymentSection />
       </FormSection>
       <OrderSummary

@@ -11,7 +11,7 @@ const OptimizedImage = ({
   fetchPriority,
   loading,
   className,
-  fallback = '/fallback.png', // fallback image path in public/
+  //fallback = '/fallback.png',
   ...props
 }) => {
   const [imgSrc, setImgSrc] = useState(src);
@@ -28,7 +28,7 @@ const OptimizedImage = ({
       sizes={sizes}
       style={style}
       className={className}
-      onError={() => setImgSrc(fallback)}
+      //onError={() => setImgSrc(fallback)}
       {...props}
     />
   );

@@ -11,7 +11,7 @@ import { getOrdersFromStorage } from '../../redux/slices/orderSlice';
 import { useEffect, useRef, useState } from 'react';
 import { borderRadius, colors, fontSizes, pxToRem } from '../../assets/styles/theme.js';
 
-const CheckoutForm = ({ discountedTotal, orderItems }) => {
+const CheckoutForm = ({ discountedTotal, orderItems, onPlaceOrder }) => {
   const { user, isAuthenticated } = useAuth();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -63,6 +63,9 @@ const CheckoutForm = ({ discountedTotal, orderItems }) => {
     const updatedOrders = [...orders, newOrder];
     localStorage.setItem('orders', JSON.stringify(updatedOrders));
 
+    // Save order details to sessionStorage for OrderConfirmation page
+    sessionStorage.setItem(`order_${newOrder.id}`, JSON.stringify(newOrder));
+
     localStorage.setItem('shippingDetails', JSON.stringify(shippingData));
     localStorage.setItem('billingDetails', JSON.stringify(billingData));
 
@@ -74,7 +77,12 @@ const CheckoutForm = ({ discountedTotal, orderItems }) => {
 
     dispatch(clearCart());
     orderIdRef.current = newOrder.id;
-    navigate(`/order-confirmation/${newOrder.id}`);
+    // Use the callback to parent to handle navigation
+    if (onPlaceOrder) {
+      onPlaceOrder(newOrder);
+    } else {
+      navigate(`/order-confirmation/${newOrder.id}`);
+    }
   };
 
   return (
