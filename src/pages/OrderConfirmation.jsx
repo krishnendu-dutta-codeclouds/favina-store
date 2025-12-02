@@ -48,7 +48,14 @@ const OrderConfirmation = () => {
               <ProductInfo>
                 <div>{item.title}</div>
                 <div>Qty: {item.quantity}</div>
-                <div>${(item.price * item.quantity).toFixed(2)}</div>
+                <div>
+                  ${Number(item.price).toFixed(2)}
+                  {item.quantity > 1 && (
+                    <span style={{ marginLeft: 8, fontWeight: 400, color: '#333' }}>
+                      {` x ${item.quantity} = $${(Number(item.price) * item.quantity).toFixed(2)}`}
+                    </span>
+                  )}
+                </div>
               </ProductInfo>
             </ProductItem>
           ))}

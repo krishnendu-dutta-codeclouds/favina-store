@@ -175,7 +175,14 @@ const CartPage = () => {
                 <ItemImage src={item.image} alt={item.title} />
                 <ItemInfo>
                   <ItemTitle>{item.title}</ItemTitle>
-                  <ItemPrice>${item.price}</ItemPrice>
+                  <ItemPrice>
+                    ${Number(item.price).toFixed(2)}
+                    {item.quantity > 1 && (
+                      <span style={{ marginLeft: 8, fontWeight: 400, color: '#5b4a44' }}>
+                        {` x ${item.quantity} = $${(Number(item.price) * item.quantity).toFixed(2)}`}
+                      </span>
+                    )}
+                  </ItemPrice>
                   <QuantitySelector>
                     <QtyBtn onClick={() => handleQtyChange(item.id, item.quantity - 1)}>-</QtyBtn>
                     <QtyInput

@@ -112,7 +112,7 @@ const OrderDetails = () => {
                     <strong>Total:</strong> ${order.total.toFixed(2)}
                   </div>
                   <div>
-                    <Status $status={order.status}>{order.status}</Status>
+                    <Status $status={order.status}>Confirmed</Status>
                   </div>
                 </OrderHeader>
                 <OrderProducts>
@@ -121,7 +121,14 @@ const OrderDetails = () => {
                       <ProductImage src={item.image} alt={item.title} />
                       <ProductDetails>
                         <ProductName>{item.title}</ProductName>
-                        <ProductPrice>${item.price.toFixed(2)}</ProductPrice>
+                        <ProductPrice>
+                          ${Number(item.price).toFixed(2)}
+                          {item.quantity > 1 && (
+                            <span style={{ marginLeft: 8, fontWeight: 400, color: '#666' }}>
+                              {` x ${item.quantity} = $${(Number(item.price) * item.quantity).toFixed(2)}`}
+                            </span>
+                          )}
+                        </ProductPrice>
                         <ProductQuantity>Qty: {item.quantity}</ProductQuantity>
                       </ProductDetails>
                     </ProductItem>

@@ -5,7 +5,7 @@ const CartItem = ({ item, onRemove, onQuantityChange }) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
   const handleQuantityChange = (newQuantity) => {
-    const qty = Math.max(0, Math.min(99, newQuantity));
+    const qty = Math.max(1, Math.min(99, newQuantity)); // Minimum quantity is 1
     setQuantity(qty);
     onQuantityChange(qty);
   };
@@ -15,7 +15,14 @@ const CartItem = ({ item, onRemove, onQuantityChange }) => {
       <Image src={item.image} alt={item.title} />
       <Details>
         <Title>{item.title}</Title>
-        <Price>${item.price.toFixed(2)}</Price>
+        <Price>
+          ${item.price.toFixed(2)}
+          {quantity > 1 && (
+            <span style={{ marginLeft: 8, fontWeight: 400, color: colors.text }}>
+              {` x ${quantity} = $${(item.price * quantity).toFixed(2)}`}
+            </span>
+          )}
+        </Price>
         <QuantityControls>
           <Button onClick={() => handleQuantityChange(quantity - 1)}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M5 12H19" stroke="#4E4E4E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
