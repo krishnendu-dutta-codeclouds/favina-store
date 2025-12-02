@@ -32,6 +32,7 @@ function clearCartStorage(user) {
 const initialState = {
   items: [],
   isCartOpen: false,
+  cartCount: 0,
 };
 
 const cartSlice = createSlice({
@@ -40,6 +41,7 @@ const cartSlice = createSlice({
   reducers: {
     loadCartForUser: (state, action) => {
       state.items = loadCart(action.payload);
+      state.cartCount = state.items.reduce((sum, item) => sum + (item.quantity || 1), 0);
     },
     addToCart: (state, action) => {
       const item = action.payload;
@@ -49,17 +51,21 @@ const cartSlice = createSlice({
       } else {
         state.items.push({ ...item, quantity: item.quantity || 1 });
       }
+      state.cartCount = state.items.reduce((sum, i) => sum + (i.quantity || 1), 0);
     },
     removeFromCart: (state, action) => {
       state.items = state.items.filter((i) => i.id !== action.payload);
+      state.cartCount = state.items.reduce((sum, i) => sum + (i.quantity || 1), 0);
     },
     updateQuantity: (state, action) => {
       const { id, quantity } = action.payload;
       const item = state.items.find((i) => i.id === id);
       if (item) item.quantity = quantity;
+      state.cartCount = state.items.reduce((sum, i) => sum + (i.quantity || 1), 0);
     },
     clearCart: (state, action) => {
       state.items = [];
+      state.cartCount = 0;
       clearCartStorage(action?.payload);
     },
     toggleCart: (state) => {
