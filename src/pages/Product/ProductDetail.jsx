@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addToCart, toggleCart } from '../../redux/slices/cartSlice';
 import productData from '../../data/product.json';
 import 'swiper/css';
@@ -42,6 +42,20 @@ const SwiperNavStyles = createGlobalStyle`
 `;
 
 const ProductDetail = () => {
+        // Placeholder for setGlobalQuantity to prevent ReferenceError
+        const setGlobalQuantity = (productId, quantity) => {};
+      const [isInCart, setIsInCart] = useState(false);
+    // Helper to get quantity of a product in user's cart
+    const getQuantity = (productId) => {
+      if (!user?.id) return 1;
+      const allCarts = JSON.parse(localStorage.getItem('carts') || '{}');
+      const arr = Array.isArray(allCarts[user.id]) ? allCarts[user.id] : [];
+      const cartItem = arr.find(item => String(item.id) === String(productId));
+      if (cartItem && typeof cartItem.quantity === 'number' && cartItem.quantity > 0) {
+        return cartItem.quantity;
+      }
+      return 1;
+    };
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -56,14 +70,22 @@ const ProductDetail = () => {
   const { isAuthenticated, user } = useAuth();
   const [wishlist, setWishlist] = useState([]);
   const [toast, setToast] = useState(null);
-  const [isInCart, setIsInCart] = useState(false);
-  const { getQuantity, setQuantity: setGlobalQuantity } = useCartQuantity();
+  const cartItems = useAppSelector(state => state.cart.items);
 
+  // Always initialize product page quantity to 1 on product change
   useEffect(() => {
-    if (product && product.id) {
-      setQuantity(getQuantity(product.id));
+    if (!product || !product.id) return;
+    setQuantity(1);
+  }, [product]);
+
+  // If cart changes (e.g. from another tab), update quantity if this product is in cart and sidebar is open
+  useEffect(() => {
+    if (!product || !product.id) return;
+    const reduxCartItem = cartItems.find(item => String(item.id) === String(product.id));
+    if (reduxCartItem && typeof reduxCartItem.quantity === 'number' && reduxCartItem.quantity > 0) {
+      setQuantity(reduxCartItem.quantity);
     }
-  }, [product, getQuantity]);
+  }, [cartItems, product]);
 
   useEffect(() => {
     if (!product || !user?.id) return;
@@ -112,30 +134,26 @@ const ProductDetail = () => {
     
   };
 
+  // Use redux store for isInCart (initial value handled by effect below)
+
+  // Replace handleAddToCart to only add if not in cart, otherwise go to cart
   const handleAddToCart = () => {
     if (!product) return;
+    if (isInCart) {
+      navigate('/cart');
+      return;
+    }
     let updatedCart;
     const userCart = getUserCart();
-    const exists = userCart.find(item => item.id === product.id);
-    if (exists) {
-      setQuantity(exists.quantity);
-      setGlobalQuantity(product.id, exists.quantity);
-      updatedCart = userCart;
-      dispatch(toggleCart()); // Open cart sidebar
-      
-      return;
-    } else {
-      updatedCart = [...userCart, { ...product, quantity }];
-      if (isAuthenticated) {
-        setUserCart(updatedCart);
-      }
-      setGlobalQuantity(product.id, quantity);
-      dispatch(addToCart({ ...product, quantity }));
-      dispatch(toggleCart()); // Open cart sidebar
-      setIsInCart(true);
-      // Fire cartChanged event for listeners
-      window.dispatchEvent(new Event('cartChanged'));
+    updatedCart = [...userCart, { ...product, quantity }];
+    if (isAuthenticated) {
+      setUserCart(updatedCart);
     }
+    setGlobalQuantity(product.id, quantity);
+    dispatch(addToCart({ ...product, quantity }));
+    dispatch(toggleCart()); // Open cart sidebar
+    // Fire cartChanged event for listeners
+    window.dispatchEvent(new Event('cartChanged'));
   };
 
   // --- Buy Now handler ---
@@ -229,18 +247,14 @@ const ProductDetail = () => {
     };
   }, [toast]);
 
+  // Keep isInCart in sync with Redux cartItems and product
   useEffect(() => {
-    if (!product || !user?.id) return;
-    const userCart = getUserCart();
-    setIsInCart(userCart.some(item => String(item.id) === String(product.id)));
-    // Listen for cart changes
-    const syncCartStatus = () => {
-      const updatedCart = getUserCart();
-      setIsInCart(updatedCart.some(item => String(item.id) === String(product.id)));
-    };
-    window.addEventListener('cartChanged', syncCartStatus);
-    return () => window.removeEventListener('cartChanged', syncCartStatus);
-  }, [product, user?.id]);
+    if (!product) {
+      setIsInCart(false);
+      return;
+    }
+    setIsInCart(cartItems.some(item => String(item.id) === String(product.id)));
+  }, [cartItems, product]);
 
   if (loading) return <div>Loading...</div>;
   if (!product) return <div>Product not found</div>;
